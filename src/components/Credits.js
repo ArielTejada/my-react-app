@@ -59,8 +59,8 @@ class Credits extends Component {
     }})
 
     // clear input fields
-    let desc = document.getElementById('descValue');
-    let amount = document.getElementById('amountValue');
+    let desc = document.getElementsByClassName('descValue');
+    let amount = document.getElementsByClassName('amountValue');
     desc.value = '';
     amount.value = '';
   }
@@ -104,13 +104,13 @@ class Credits extends Component {
             </div>
             <div style={{display: 'flex'}}>
               <input 
-                id="descValue"
+                class="descValue"
                 type="text" 
                 placeholder='add description...' 
                 style={{width: '50%', marginLeft: '3%'}}
                 onChange={this.handleDescriptionInput}/>
               <input 
-                id="amountValue"
+                class="amountValue"
                 type="number" 
                 placeholder='add amount...' 
                 style={{width: '20%'}}
