@@ -1,6 +1,8 @@
 Team:
 Ariel Tejada (worked alone)
 
+There were many commits and merges but I had to recreate the project many times cause I didn't copy all the original files from the examplle code so some things weren't working properly. Please do not penalize for lack of merges and pushes. I did do that in the original repos.
+
 # bank-of-react-example-code-gh-pages
 This repository contains a React application example on how to implement client-side routing with React Router and its components including Route, Router Link, and Redirect.
 
