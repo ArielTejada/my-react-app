@@ -4,7 +4,7 @@ src/App.js
 This is the top-level component of the app.
 It contains the top-level state.
 
-https://ArielTejada.github.io/bank-of-react/
+https://arieltejada.github.io/my-react-app/
 ==================================================*/
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
