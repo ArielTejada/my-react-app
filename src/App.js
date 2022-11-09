@@ -45,6 +45,7 @@ class App extends Component {
     this.setState({currentUser: newUser})
   }
 
+  // updates debits total amount reduces decimal places to 2
   updateDebits(debit){
     this.state.debits.push(debit)
     this.setState({
@@ -52,6 +53,7 @@ class App extends Component {
     })
   }
 
+  // updates credits total amount reduces decimal places to 2
   updateCredits(credit){
     this.state.credits.push(credit)
     this.setState({
@@ -59,10 +61,12 @@ class App extends Component {
     })
   }
 
+  // updates account balance. Its passed into other components so they can call state changes
   updateAccountBalance(newAccountBalance){
     this.setState({accountBalance: newAccountBalance})
   }
 
+  // api calls one after another
   async componentDidMount(){
     let debitsTotal = 0; 
     let creditsTotal = 0;
