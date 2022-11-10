@@ -47,22 +47,24 @@ class App extends Component {
 
   // updates debits total amount 
   updateDebits(debit){
-    this.state.debits.push(debit);
+    let newDebits = this.state.debits;
+    newDebits.push(debit);
+    this.setState({debits: newDebits});
+
     let total = this.state.debitsTotal;
     total += parseFloat(debit.amount);
-    this.setState({
-      debitsTotal: total
-    })
+    this.setState({debitsTotal: total})
   }
 
   // update credits total amount
   updateCredits(credit){
-    this.state.credits.push(credit);
+    let newCredits = this.state.credits;
+    newCredits.push(credit);
+    this.setState({credits: newCredits});
+
     let total = this.state.creditsTotal;
     total += parseFloat(credit.amount);
-    this.setState({
-      creditsTotal: total
-    })
+    this.setState({creditsTotal: total})
   }
 
   // updates account balance. Its passed into other components so they can call state changes
@@ -94,11 +96,6 @@ class App extends Component {
   }
 
   render() {  
-
-    let accountBalance = this.state.accountBalance
-    let debitsTotal = this.state.debitsTotal
-    let creditsTotal = this.state.creditsTotal
-    let accountBalanceTotal = (accountBalance + creditsTotal - debitsTotal)
 
     const HomeComponent = () => (<Home accountBalance={this.state.accountBalance} />);
     const UserProfileComponent = () => (

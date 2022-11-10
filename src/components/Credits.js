@@ -47,7 +47,7 @@ class Credits extends Component {
     this.props.updateCredits(this.state.creditInput);
     let accountBalance = this.props.accountBalance;
     let creditAmount = this.state.creditInput.amount;
-    let newAccountBalance = accountBalance + creditAmount;
+    let newAccountBalance = (accountBalance + creditAmount);
     this.props.updateAccountBalance(newAccountBalance.toFixed(2));
 
     // reset credit input
