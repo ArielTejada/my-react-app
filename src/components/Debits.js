@@ -30,14 +30,14 @@ class Debits extends Component {
 
   // add debit description
 handleDescriptionInput = (event) => {
-  const newDebitInput = this.state.debitInput;
+  let newDebitInput = this.state.debitInput;
   newDebitInput.description = event.target.value;
   this.setState({debitInput: newDebitInput});
 }
 
 // add credit amount
 handleAmountInput = (event) => {
-  const newDebitAmount = this.state.debitInput;
+  let newDebitAmount = this.state.debitInput;
   newDebitAmount.amount = event.target.value ;
   this.setState({debitInput: newDebitAmount});
 }
@@ -50,7 +50,7 @@ handleAddDebit = () => {
   let newAccountBalance = (accountBalance - debitAmount);
   this.props.updateAccountBalance(newAccountBalance.toFixed(2));
 
-  // reset credit input
+  // reset debit input
   this.setState({
     debitInput: {
       description: '', 
@@ -59,10 +59,10 @@ handleAddDebit = () => {
   }})
 
   // clear input fields
-  let desc = document.getElementsByClassName('descValue');
-  let amount = document.getElementsByClassName('amountValue');
-  desc.value = '';
-  amount.value = '';
+  let inputTags = document.getElementsByTagName("input");
+  for (let i = 0; i < inputTags.length; i++){
+    inputTags[i].value = ''
+  }
 }
 
   render(){
@@ -104,13 +104,11 @@ handleAddDebit = () => {
             </div>
             <div style={{display: 'flex'}}>
               <input 
-                class="descValue"
                 type="text" 
                 placeholder='add description...' 
                 style={{width: '50%', marginLeft: '3%'}}
                 onChange={this.handleDescriptionInput}/>
               <input 
-                class="amountValue"
                 type="number" 
                 placeholder='add amount...' 
                 style={{width: '20%'}}
@@ -131,7 +129,6 @@ handleAddDebit = () => {
     </div>
     );
   }
-  
 }
 
 export default Debits;

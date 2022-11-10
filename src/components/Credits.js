@@ -30,14 +30,14 @@ class Credits extends Component {
 
 // add credit description
   handleDescriptionInput = (event) => {
-    const newCreditInput = this.state.creditInput;
+    let newCreditInput = this.state.creditInput;
     newCreditInput.description = event.target.value;
     this.setState({creditInput: newCreditInput});
   }
 
 // add credit amount
   handleAmountInput = (event) => {
-    const newCreditAmount = this.state.creditInput;
+    let newCreditAmount = this.state.creditInput;
     newCreditAmount.amount = event.target.value ;
     this.setState({creditInput: newCreditAmount});
   }
@@ -59,10 +59,10 @@ class Credits extends Component {
     }})
 
     // clear input fields
-    let desc = document.getElementsByClassName('descValue');
-    let amount = document.getElementsByClassName('amountValue');
-    desc.value = '';
-    amount.value = '';
+    let inputTags = document.getElementsByTagName("input");
+    for (let i = 0; i < inputTags.length; i++){
+      inputTags[i].value = ''
+    }
   }
 
   render(){
@@ -86,10 +86,10 @@ class Credits extends Component {
             </div>)  
           }  
 
-          <h2>Total Debits: {this.state.debitsTotal}</h2>
-          <h2>Total Credits: {this.state.creditsTotal}</h2>
+          <h2>Total Debits: {this.props.debitsTotal}</h2>
+          <h2>Total Credits: {this.props.creditsTotal}</h2>
           <h2>Balance = (Credits - Debits)</h2>
-          <h2>Your Current Balance: {this.state.accountBalance}</h2>
+          <h2>Your Current Balance: {this.props.accountBalance}</h2>
 
         </div>
       
@@ -104,13 +104,11 @@ class Credits extends Component {
             </div>
             <div style={{display: 'flex'}}>
               <input 
-                class="descValue"
                 type="text" 
                 placeholder='add description...' 
                 style={{width: '50%', marginLeft: '3%'}}
                 onChange={this.handleDescriptionInput}/>
               <input 
-                class="amountValue"
                 type="number" 
                 placeholder='add amount...' 
                 style={{width: '20%'}}
@@ -127,7 +125,7 @@ class Credits extends Component {
 
         </div>
     <br/>
-      <Link to="/" onClick={this.handleBackToHome}>Return to Home</Link>
+    <Link to="/" onClick={this.handleBackToHome}>Return to Home</Link>
     </div>
     );
   }
