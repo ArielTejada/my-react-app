@@ -6,8 +6,8 @@ const Styles = {
     },
 
     wholePage: {
-    marginLeft: '10%', 
-    marginRight: '10%'
+    marginLeft: '20%', 
+    marginRight: '20%'
     },
 
     categories: {

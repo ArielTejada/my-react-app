@@ -22,7 +22,7 @@ class App extends Component {
   constructor(props) {  // Create and initialize state
     super(props); 
     this.state = {
-      accountBalance: 0,
+      accountBalance: 1234567.89,
       credits: [],
       debits: [],
       creditsTotal: 0,
@@ -45,19 +45,23 @@ class App extends Component {
     this.setState({currentUser: newUser})
   }
 
-  // updates debits total amount reduces decimal places to 2
+  // updates debits total amount 
   updateDebits(debit){
-    this.state.debits.push(debit)
+    this.state.debits.push(debit);
+    let total = this.state.debitsTotal;
+    total += parseFloat(debit.amount);
     this.setState({
-      debitsTotal: this.state.debitsTotal + parseFloat(debit.amount)
+      debitsTotal: total
     })
   }
 
-  // updates credits total amount reduces decimal places to 2
+  // update credits total amount
   updateCredits(credit){
-    this.state.credits.push(credit)
+    this.state.credits.push(credit);
+    let total = this.state.creditsTotal;
+    total += parseFloat(credit.amount);
     this.setState({
-      creditsTotal: this.state.creditsTotal + parseFloat(credit.amount)
+      creditsTotal: total
     })
   }
 
@@ -70,12 +74,16 @@ class App extends Component {
   async componentDidMount(){
     let debitsTotal = 0; 
     let creditsTotal = 0;
+
+    // Getting Debits Data
     axios.get("https://moj-api.herokuapp.com/debits")        
       .then((response) =>{               
         this.setState({debits: response.data})
         response.data.forEach((data) => {debitsTotal += data.amount})
         this.setState({debitsTotal: debitsTotal})
       })   
+
+    // Getting Credits Data
     axios.get("https://moj-api.herokuapp.com/credits")
     .then((response) =>{               
       this.setState({credits: response.data})
@@ -86,6 +94,11 @@ class App extends Component {
   }
 
   render() {  
+
+    let accountBalance = this.state.accountBalance
+    let debitsTotal = this.state.debitsTotal
+    let creditsTotal = this.state.creditsTotal
+    let accountBalanceTotal = (accountBalance + creditsTotal - debitsTotal)
 
     const HomeComponent = () => (<Home accountBalance={this.state.accountBalance} />);
     const UserProfileComponent = () => (
@@ -121,8 +134,8 @@ class App extends Component {
           <Route exact path="/" render={HomeComponent}/>
           <Route exact path="/userProfile" render={UserProfileComponent}/>
           <Route exact path="/login" render={LogInComponent}/>
-          <Route exact path="/credits" render={CreditsComponent}/>
           <Route exact path="/debits" render={DebitsComponent}/>
+          <Route exact path="/credits" render={CreditsComponent}/>
         </div>
       </Router>
     );
